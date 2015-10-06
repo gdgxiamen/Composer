@@ -97,7 +97,14 @@
       'use strict';
       
       Polymer({
-        is: 'composer-keyboard'
+        is: 'composer-keyboard',
+        ready: function () {
+          MIDI.loadPlugin({
+            instrument: "acoustic_grand_piano",
+            soundfontUrl: "../bower_components/midi/examples/soundfont/",
+            onsuccess: function () {}
+          });
+        }
       });
     })();
   </script>
