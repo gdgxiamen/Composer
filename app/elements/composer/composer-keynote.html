@@ -15,7 +15,7 @@
   	  }
 
     </style>
-    <div class="keynote" style="display: inline-block;" on-click="sound"></div>
+    <div class="keynote" style="display: inline-block;" on-click="playNote"></div>
   </template>
 
   <script>
@@ -24,14 +24,18 @@
       
       Polymer({
         is: 'composer-keynote',
-        sound: function () {
+        properties: {
+        	note: {
+        		type: Number
+        	}
+        },
+        playNote: function () {
         	var delay = 0;
-        	var note = 50;
         	var velocity = 127;
 
         	MIDI.setVolume(0, 127);
-        	MIDI.noteOn(0, note, velocity, delay);
-        	MIDI.noteOff(0, note, delay+0.75);
+        	MIDI.noteOn(0, this.note, velocity, delay);
+        	MIDI.noteOff(0, this.note, delay+0.75);
         }
       });
     })();
