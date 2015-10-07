@@ -57,6 +57,11 @@ Left Nav + List + Detail
   </style>
 
   <template>
+    <iron-localstorage name="composer-storage"
+      value="{{data}}"
+      on-iron-localstorage-load="displayData"
+      on-iron-localstorage-load-empty="initializeDefaultData"
+    ></iron-localstorage>
 
     <paper-drawer-panel id="navDrawerPanel" responsive-width="1280px">
 
@@ -77,7 +82,7 @@ Left Nav + List + Detail
 
           <!-- List -->
           <paper-menu class="list" on-iron-activate="_listTap">
-            <template is="dom-repeat" items="{{songs}}" as="song">
+            <template is="dom-repeat" items="{{data.songs}}" as="song">
               <paper-item>[[song.title]]</paper-item>
             </template>
           </paper-menu>
@@ -109,10 +114,120 @@ Left Nav + List + Detail
     Polymer({
       is: 'x-app',
       properties: {
-        songs: {
-          type: Array,
-          notify: true,
+        data: {
+          type: Object
         }
+      },
+      initializeDefaultData: function () {
+        console.log("iron-localstorage initializing app default data");
+        this.data = {
+          presets: {
+            tunings: [
+              {
+                name: 'C大调',
+                notes: [
+                  {
+                    name: 'c',
+                    midi: 48
+                  },
+                  {
+                    name: 'd',
+                    midi: 50
+                  },
+                  {
+                    name: 'e',
+                    midi: 52
+                  },
+                  {
+                    name: 'f',
+                    midi: 53
+                  },
+                  {
+                    name: 'g',
+                    midi: 55
+                  },
+                  {
+                    name: 'a',
+                    midi: 57
+                  },
+                  {
+                    name: 'b',
+                    midi: 59
+                  },
+                  {
+                    name: 'c1',
+                    midi: 60
+                  },
+                  {
+                    name: 'd1',
+                    midi: 62
+                  },
+                  {
+                    name: 'e1',
+                    midi: 64
+                  },
+                  {
+                    name: 'f1',
+                    midi: 65
+                  },
+                  {
+                    name: 'g1',
+                    midi: 67
+                  },
+                  {
+                    name: 'a1',
+                    midi: 69
+                  },
+                  {
+                    name: 'b1',
+                    midi: 71
+                  },
+                  {
+                    name: 'c2',
+                    midi: 72
+                  },
+                  {
+                    name: 'd2',
+                    midi: 74
+                  },
+                  {
+                    name: 'e2',
+                    midi: 76
+                  },
+                  {
+                    name: 'f2',
+                    midi: 77
+                  },
+                  {
+                    name: 'g2',
+                    midi: 79
+                  },
+                  {
+                    name: 'a2',
+                    midi: 81
+                  },
+                  {
+                    name: 'b2',
+                    midi: 83
+                  },
+                  {
+                    name: 'c3',
+                    midi: 84
+                  }
+                ]
+              },
+            ]
+          },
+          songs: [
+            {
+              title: 'my song 1'
+            }
+          ]
+        };
+      },
+      displayData: function () {
+        console.log("Data loaded:");
+        console.log(this.data);
       },
       _computeListWidth: function(isMobile) {
         // when in mobile screen size, make the list be 100% width to cover the whole screen
@@ -122,9 +237,6 @@ Left Nav + List + Detail
         this.$.mainDrawerPanel.closeDrawer();
       },
       ready: function () {
-        this.songs = [
-          {'title': 'my song 1'}
-        ]
       }
     });
   </script>
