@@ -36,74 +36,21 @@
         height: 100%;
       }
     </style>
-    <h3>Untitle Song</h3>
-    <div class="note-row">
-      <div class="note-name">C</div>
-      <composer-keynote note="48"></composer-keynote>
-      <composer-keynote note="48"></composer-keynote>
-      <composer-keynote note="48"></composer-keynote>
-      <composer-keynote note="48"></composer-keynote>
-      <composer-keynote note="48"></composer-keynote>
-      <composer-keynote note="48"></composer-keynote>
-      <composer-keynote note="48"></composer-keynote>
-      <composer-keynote note="48"></composer-keynote>      
-    </div>
-    <div class="note-row">
-      <div class="note-name">C</div>
-      <composer-keynote note="50"></composer-keynote>
-      <composer-keynote note="50"></composer-keynote>
-      <composer-keynote note="50"></composer-keynote>
-      <composer-keynote note="50"></composer-keynote>
-      <composer-keynote note="50"></composer-keynote>
-      <composer-keynote note="50"></composer-keynote>
-      <composer-keynote note="50"></composer-keynote>
-      <composer-keynote note="50"></composer-keynote>      
-    </div>
-    <div class="note-row">
-      <div class="note-name">C</div>
-      <composer-keynote note="52"></composer-keynote>
-      <composer-keynote note="52"></composer-keynote>
-      <composer-keynote note="52"></composer-keynote>
-      <composer-keynote note="52"></composer-keynote>
-      <composer-keynote note="52"></composer-keynote>
-      <composer-keynote note="52"></composer-keynote>
-      <composer-keynote note="52"></composer-keynote>
-      <composer-keynote note="52"></composer-keynote>      
-    </div>
-    <div class="note-row">
-      <div class="note-name">C</div>
-      <composer-keynote note="60"></composer-keynote>
-      <composer-keynote note="48"></composer-keynote>
-      <composer-keynote note="48"></composer-keynote>
-      <composer-keynote note="48"></composer-keynote>
-      <composer-keynote note="48"></composer-keynote>
-      <composer-keynote note="48"></composer-keynote>
-      <composer-keynote note="48"></composer-keynote>
-      <composer-keynote note="48"></composer-keynote>      
-    </div>
-    <div class="note-row">
-      <div class="note-name">C</div>
-      <composer-keynote note="62"></composer-keynote>
-      <composer-keynote note="50"></composer-keynote>
-      <composer-keynote note="50"></composer-keynote>
-      <composer-keynote note="50"></composer-keynote>
-      <composer-keynote note="50"></composer-keynote>
-      <composer-keynote note="50"></composer-keynote>
-      <composer-keynote note="50"></composer-keynote>
-      <composer-keynote note="50"></composer-keynote>      
-    </div>
-    <div class="note-row">
-      <div class="note-name">C</div>
-      <composer-keynote note="64"></composer-keynote>
-      <composer-keynote note="52"></composer-keynote>
-      <composer-keynote note="52"></composer-keynote>
-      <composer-keynote note="52"></composer-keynote>
-      <composer-keynote note="52"></composer-keynote>
-      <composer-keynote note="52"></composer-keynote>
-      <composer-keynote note="52"></composer-keynote>
-      <composer-keynote note="52"></composer-keynote>      
-    </div>
+    <h3>未命名 (<span>{{tuning.name}}</span>)</h3>
 
+    <template is="dom-repeat" items="{{tuning.notes}}" as="note">
+      <div class="note-row">
+        <div class="note-name">{{note.name}}</div>
+        <composer-keynote note="{{note.midi}}"></composer-keynote>
+        <composer-keynote note="{{note.midi}}"></composer-keynote>
+        <composer-keynote note="{{note.midi}}"></composer-keynote>
+        <composer-keynote note="{{note.midi}}"></composer-keynote>
+        <composer-keynote note="{{note.midi}}"></composer-keynote>
+        <composer-keynote note="{{note.midi}}"></composer-keynote>
+        <composer-keynote note="{{note.midi}}"></composer-keynote>
+        <composer-keynote note="{{note.midi}}"></composer-keynote>      
+      </div>
+    </template>
   </template>
 
   <script>
@@ -112,6 +59,104 @@
       
       Polymer({
         is: 'composer-keyboard',
+        properties: {
+          tuning: {
+            type: Object,
+            value: {
+              name: 'C大调',
+              notes: [
+                {
+                  name: 'c',
+                  midi: 48
+                },
+                {
+                  name: 'd',
+                  midi: 50
+                },
+                {
+                  name: 'e',
+                  midi: 52
+                },
+                {
+                  name: 'f',
+                  midi: 53
+                },
+                {
+                  name: 'g',
+                  midi: 55
+                },
+                {
+                  name: 'a',
+                  midi: 57
+                },
+                {
+                  name: 'b',
+                  midi: 59
+                },
+                {
+                  name: 'c1',
+                  midi: 60
+                },
+                {
+                  name: 'd1',
+                  midi: 62
+                },
+                {
+                  name: 'e1',
+                  midi: 64
+                },
+                {
+                  name: 'f1',
+                  midi: 65
+                },
+                {
+                  name: 'g1',
+                  midi: 67
+                },
+                {
+                  name: 'a1',
+                  midi: 69
+                },
+                {
+                  name: 'b1',
+                  midi: 71
+                },
+                {
+                  name: 'c2',
+                  midi: 72
+                },
+                {
+                  name: 'd2',
+                  midi: 74
+                },
+                {
+                  name: 'e2',
+                  midi: 76
+                },
+                {
+                  name: 'f2',
+                  midi: 77
+                },
+                {
+                  name: 'g2',
+                  midi: 79
+                },
+                {
+                  name: 'a2',
+                  midi: 81
+                },
+                {
+                  name: 'b2',
+                  midi: 83
+                },
+                {
+                  name: 'c3',
+                  midi: 84
+                }
+              ]
+            }
+          }
+        },
         ready: function () {
           MIDI.loadPlugin({
             instrument: "acoustic_grand_piano",
