@@ -2,20 +2,16 @@
   <template>
     <style>
       :host {
-        display: inline;
-        margin: 0;
-        padding: 0;
+        display: block;
       }
       .keynote {
-      	margin: 0;
-      	padding: 0;
   	  	width: 50px;
-  	  	height: 100px;
+        height: 100%;
   	  	border: 1px red solid;
   	  }
 
     </style>
-    <div class="keynote" style="display: inline-block;" on-click="playNote"></div>
+    <div class="keynote" on-click="playNote" on-up="selected"></div>
   </template>
 
   <script>
@@ -36,6 +32,9 @@
         	MIDI.setVolume(0, 127);
         	MIDI.noteOn(0, this.note, velocity, delay);
         	MIDI.noteOff(0, this.note, delay+0.75);
+        },
+        selected: function () {
+          this.$$("div").style.backgroundColor = "#FF0000";
         }
       });
     })();
