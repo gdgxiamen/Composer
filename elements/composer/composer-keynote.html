@@ -1,0 +1,43 @@
+<dom-module id="composer-keynote">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+      .keynote {
+  	  	width: 50px;
+        height: 100%;
+  	  	border: 1px red solid;
+  	  }
+
+    </style>
+    <div class="keynote" on-click="playNote" on-up="selected"></div>
+  </template>
+
+  <script>
+    (function() {
+      'use strict';
+      
+      Polymer({
+        is: 'composer-keynote',
+        properties: {
+        	note: {
+        		type: Number
+        	}
+        },
+        playNote: function () {
+        	var delay = 0;
+        	var velocity = 127;
+
+        	MIDI.setVolume(0, 127);
+        	MIDI.noteOn(0, this.note, velocity, delay);
+        	MIDI.noteOff(0, this.note, delay+0.75);
+        },
+        selected: function () {
+          this.$$('div').style.backgroundColor = '#FF0000';
+        }
+      });
+    })();
+  </script>
+
+</dom-module>
